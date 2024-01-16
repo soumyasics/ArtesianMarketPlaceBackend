@@ -13,5 +13,5 @@ const route=require('./routes')
 app.use('/atresian_marketplace',route)
 
 app.listen(4004,()=>{
-    console.log("Server created successfully");
+    console.log("Server created successfully at 4004");
 })
