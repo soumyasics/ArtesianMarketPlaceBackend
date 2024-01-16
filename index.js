@@ -1,6 +1,6 @@
 const express=require('express')
 const bodyParser=require('body-parser')
-const db=require('./DBConnection')
+const db=require('./dbConnection')
 const app=express()
 const cors=require('cors')
 
