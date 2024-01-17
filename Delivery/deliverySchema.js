@@ -1,6 +1,6 @@
 const mongoose= require("mongoose");
 
-const userSchema=mongoose.Schema({
+const deliverySchema=mongoose.Schema({
     firstname:{
         type:String,
         required:true
@@ -10,7 +10,7 @@ const userSchema=mongoose.Schema({
         required:true
     },
     dob:{
-        type:Date,
+        type:Number,
         required:true
     },
     contact:{
@@ -45,5 +45,5 @@ const userSchema=mongoose.Schema({
         required:true
     }
 });
-module.exports=mongoose.model('users',userSchema)
+module.exports=mongoose.model('deliveryagents',deliverySchema)
 

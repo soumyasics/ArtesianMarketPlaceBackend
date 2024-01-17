@@ -1,6 +1,6 @@
 const mongoose= require("mongoose");
 
-const userSchema=mongoose.Schema({
+const artistSchema=mongoose.Schema({
     firstname:{
         type:String,
         required:true
@@ -10,7 +10,7 @@ const userSchema=mongoose.Schema({
         required:true
     },
     dob:{
-        type:Date,
+        type:Number,
         required:true
     },
     contact:{
@@ -43,7 +43,11 @@ const userSchema=mongoose.Schema({
     password:{
         type:String,
         required:true
+    },
+    image:{
+        type:Object,
+        default:'user.png'
     }
 });
-module.exports=mongoose.model('users',userSchema)
+module.exports=mongoose.model('artists',artistSchema)
 

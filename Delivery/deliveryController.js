@@ -1,4 +1,4 @@
-const users=require('./userSchema')
+const deliverys=require('./deliverySchema')
 const multer=require('multer')
 
 
@@ -12,12 +12,14 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage }).single("image");
-//User Registration 
-
-const registerUser=(req,res)=>{
+//delivery Registration 
 
 
-    const newUser=new users({
+
+const registerdelivery=(req,res)=>{
+
+
+    const newdelivery=new deliverys({
         firstname:req.body.firstname,
         lastname:req.body.lastname,
 
@@ -28,17 +30,15 @@ const registerUser=(req,res)=>{
         contact:req.body.contact,
         district:req.body.district,
         password:req.body.password,
-        dob:req.body.dob,
-        image:req.file
+        dob:req.body.dob
     })
-    newUser.save().then(data=>{
+    newdelivery.save().then(data=>{
         res.json({
             status:200,
             msg:"Inserted successfully",
             data:data
         })
     }).catch(err=>{
-   
         res.json({
             status:500,
             msg:"Data not Inserted",
@@ -46,14 +46,14 @@ const registerUser=(req,res)=>{
         })
     })
 }
-//User Registration -- finished
+//delivery Registration -- finished
 
-//Login User 
-const loginUser=(req,res)=>{
+//Login delivery 
+const logindelivery=(req,res)=>{
     const email=req.body.email
     const password=req.body.password
   
-    users.findOne({email:email}).exec().then(data=>{
+    deliverys.findOne({email:email}).exec().then(data=>{
       if(password==data.password){
         res.json({
           status:200,
@@ -71,20 +71,20 @@ const loginUser=(req,res)=>{
   }).catch(err=>{
   res.json({
       status:500,
-      msg:"User not found",
+      msg:"delivery not found",
       Error:err
   })
   })
     };
   
   
-  //Login User --finished
+  //Login delivery --finished
   
   
-  //View all Users
+  //View all deliverys
   
-  const viewUsers=(req,res)=>{
-    users.find().exec()
+  const viewdeliverys=(req,res)=>{
+    deliverys.find().exec()
     .then(data=>{
       if(data.length>0){
       res.json({
@@ -108,15 +108,15 @@ const loginUser=(req,res)=>{
   
   }
   
-  // view Users finished
+  // view deliverys finished
   
   
-  //update User by id
-  const editUserById=(req,res)=>{
+  //update delivery by id
+  const editdeliveryById=(req,res)=>{
   
     
       
-    users.findByIdAndUpdate({_id:req.params.id},{
+    deliverys.findByIdAndUpdate({_id:req.params.id},{
         firstname:req.body.firstname,
         lastname:req.body.lastname,
 
@@ -142,8 +142,8 @@ const loginUser=(req,res)=>{
   })
   }
 // view cust by id
-  const viewUserById=(req,res)=>{
-    users.findOne({_id:req.params.id}).exec()
+  const viewdeliveryById=(req,res)=>{
+    deliverys.findOne({_id:req.params.id}).exec()
     .then(data=>{
       console.log(data);
       res.json({
@@ -163,9 +163,9 @@ const loginUser=(req,res)=>{
   
   }
   
-  const deleteUserById=(req,res)=>{
+  const deletedeliveryById=(req,res)=>{
 
-    users.findByIdAndDelete({_id:req.params.id}).exec()
+    deliverys.findByIdAndDelete({_id:req.params.id}).exec()
     .then(data=>{
     emps=data
       console.log(data);
@@ -185,12 +185,12 @@ const loginUser=(req,res)=>{
   })
   
   }
-  //forgotvPawd User by id
+  //forgotvPawd delivery by id
   const forgotPwd=(req,res)=>{
   
     
       
-    users.findOneAndUpdate({email:req.body.email},{
+    deliverys.findOneAndUpdate({email:req.body.email},{
      
       password:req.body.password
       })
@@ -203,7 +203,7 @@ const loginUser=(req,res)=>{
     else
     res.json({
       status:500,
-      msg:"User Not Found"
+      msg:"delivery Not Found"
      
   })
   }).catch(err=>{
@@ -219,13 +219,4 @@ const loginUser=(req,res)=>{
 
 
 
-module.exports={
-  registerUser,
-  viewUsers,
-  editUserById,
-  loginUser,
-  forgotPwd,
-  viewUserById,
-  deleteUserById,
-  upload
-}
+module.exports={registerdelivery,viewdeliverys,editdeliveryById,logindelivery,forgotPwd,viewdeliveryById,deletedeliveryById}

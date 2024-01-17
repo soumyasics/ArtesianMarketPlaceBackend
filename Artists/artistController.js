@@ -1,6 +1,5 @@
-const users=require('./userSchema')
+const Artists=require('./artistSchema')
 const multer=require('multer')
-
 
 const storage = multer.diskStorage({
   destination: function (req, res, cb) {
@@ -12,15 +11,15 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage }).single("image");
-//User Registration 
+//Artist Registration 
 
-const registerUser=(req,res)=>{
+const registerArtist=(req,res)=>{
 
 
-    const newUser=new users({
+    const newArtist=new Artists({
         firstname:req.body.firstname,
         lastname:req.body.lastname,
-
+        image:req.file,
         housename:req.body.housename,
         email:req.body.email,
         city:req.body.city,
@@ -28,17 +27,15 @@ const registerUser=(req,res)=>{
         contact:req.body.contact,
         district:req.body.district,
         password:req.body.password,
-        dob:req.body.dob,
-        image:req.file
+        dob:req.body.dob
     })
-    newUser.save().then(data=>{
+    newArtist.save().then(data=>{
         res.json({
             status:200,
             msg:"Inserted successfully",
             data:data
         })
     }).catch(err=>{
-   
         res.json({
             status:500,
             msg:"Data not Inserted",
@@ -46,14 +43,14 @@ const registerUser=(req,res)=>{
         })
     })
 }
-//User Registration -- finished
+//Artist Registration -- finished
 
-//Login User 
-const loginUser=(req,res)=>{
+//Login Artist 
+const loginArtist=(req,res)=>{
     const email=req.body.email
     const password=req.body.password
   
-    users.findOne({email:email}).exec().then(data=>{
+    Artists.findOne({email:email}).exec().then(data=>{
       if(password==data.password){
         res.json({
           status:200,
@@ -71,20 +68,20 @@ const loginUser=(req,res)=>{
   }).catch(err=>{
   res.json({
       status:500,
-      msg:"User not found",
+      msg:"Artist not found",
       Error:err
   })
   })
     };
   
   
-  //Login User --finished
+  //Login Artist --finished
   
   
-  //View all Users
+  //View all Artists
   
-  const viewUsers=(req,res)=>{
-    users.find().exec()
+  const viewArtists=(req,res)=>{
+    Artists.find().exec()
     .then(data=>{
       if(data.length>0){
       res.json({
@@ -108,15 +105,15 @@ const loginUser=(req,res)=>{
   
   }
   
-  // view Users finished
+  // view Artists finished
   
   
-  //update User by id
-  const editUserById=(req,res)=>{
+  //update Artist by id
+  const editArtistById=(req,res)=>{
   
     
       
-    users.findByIdAndUpdate({_id:req.params.id},{
+    Artists.findByIdAndUpdate({_id:req.params.id},{
         firstname:req.body.firstname,
         lastname:req.body.lastname,
 
@@ -142,8 +139,8 @@ const loginUser=(req,res)=>{
   })
   }
 // view cust by id
-  const viewUserById=(req,res)=>{
-    users.findOne({_id:req.params.id}).exec()
+  const viewArtistById=(req,res)=>{
+    Artists.findOne({_id:req.params.id}).exec()
     .then(data=>{
       console.log(data);
       res.json({
@@ -163,9 +160,9 @@ const loginUser=(req,res)=>{
   
   }
   
-  const deleteUserById=(req,res)=>{
+  const deleteArtistById=(req,res)=>{
 
-    users.findByIdAndDelete({_id:req.params.id}).exec()
+    Artists.findByIdAndDelete({_id:req.params.id}).exec()
     .then(data=>{
     emps=data
       console.log(data);
@@ -185,12 +182,12 @@ const loginUser=(req,res)=>{
   })
   
   }
-  //forgotvPawd User by id
+  //forgotvPawd Artist by id
   const forgotPwd=(req,res)=>{
   
     
       
-    users.findOneAndUpdate({email:req.body.email},{
+    Artists.findOneAndUpdate({email:req.body.email},{
      
       password:req.body.password
       })
@@ -203,7 +200,7 @@ const loginUser=(req,res)=>{
     else
     res.json({
       status:500,
-      msg:"User Not Found"
+      msg:"Artist Not Found"
      
   })
   }).catch(err=>{
@@ -220,12 +217,12 @@ const loginUser=(req,res)=>{
 
 
 module.exports={
-  registerUser,
-  viewUsers,
-  editUserById,
-  loginUser,
+  registerArtist,
+  viewArtists,
+  editArtistById,
+  loginArtist,
   forgotPwd,
-  viewUserById,
-  deleteUserById,
+  viewArtistById,
+  deleteArtistById,
   upload
 }
