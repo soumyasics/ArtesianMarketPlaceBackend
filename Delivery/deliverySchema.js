@@ -9,7 +9,7 @@ const deliverySchema=mongoose.Schema({
         type:String,
         required:true
     },
-    dob:{
+    age:{
         type:Number,
         required:true
     },
@@ -43,7 +43,27 @@ const deliverySchema=mongoose.Schema({
     password:{
         type:String,
         required:true
+    },
+    aadhar:{
+        type:Number,
+        unique:true,
+        required:true,
+       
+        dropDups: true
+        },
+    licence:{
+        type:Object,
+        required:true
+    },
+    image:{
+        type:Object,
+        required:true
+    },
+    isactive:{
+        type:Boolean,
+        default:false
     }
+
 });
 module.exports=mongoose.model('deliveryagents',deliverySchema)
 

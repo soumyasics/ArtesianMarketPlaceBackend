@@ -30,7 +30,9 @@ const registerdelivery=(req,res)=>{
         contact:req.body.contact,
         district:req.body.district,
         password:req.body.password,
-        dob:req.body.dob
+        age:req.body.age,
+        aadhar:req.body.aadhar,
+        licence:req.file
     })
     newdelivery.save().then(data=>{
         res.json({
@@ -84,7 +86,7 @@ const logindelivery=(req,res)=>{
   //View all deliverys
   
   const viewdeliverys=(req,res)=>{
-    deliverys.find().exec()
+    deliverys.find({isactive:true}).exec()
     .then(data=>{
       if(data.length>0){
       res.json({
@@ -110,23 +112,83 @@ const logindelivery=(req,res)=>{
   
   // view deliverys finished
   
+  //View all deliverys
   
+  const viewdeliveryReqs=(req,res)=>{
+    deliverys.find({isactive:false}).exec()
+    .then(data=>{
+      if(data.length>0){
+      res.json({
+          status:200,
+          msg:"Data obtained successfully",
+          data:data
+      })
+    }else{
+      res.json({
+        status:200,
+        msg:"No Data obtained "
+    })
+    }
+  }).catch(err=>{
+      res.json({
+          status:500,
+          msg:"Data not Inserted",
+          Error:err
+      })
+  })
+  
+  }
+  
+  // view delivery reqs finished
+
+
+  //accept all deliverys
+  
+  const acceptDelReqs=(req,res)=>{
+    deliverys.findByIdAndUpdate({_id:req.params.id},
+      {isactive:true}).exec()
+    .then(data=>{
+      if(data.length>0){
+      res.json({
+          status:200,
+          msg:"Data obtained successfully",
+          data:data
+      })
+    }else{
+      res.json({
+        status:200,
+        msg:"No Data obtained "
+    })
+    }
+  }).catch(err=>{
+      res.json({
+          status:500,
+          msg:"Data not Inserted",
+          Error:err
+      })
+  })
+  
+  }
+  
+  // view deliverys finished
+
+
   //update delivery by id
   const editdeliveryById=(req,res)=>{
   
-    
-      
     deliverys.findByIdAndUpdate({_id:req.params.id},{
-        firstname:req.body.firstname,
-        lastname:req.body.lastname,
+      firstname:req.body.firstname,
+      lastname:req.body.lastname,
 
-        housename:req.body.housename,
-        email:req.body.email,
-        city:req.body.city,
-        pincode:req.body.pincode,
-        contact:req.body.contact,
-        district:req.body.district,
-        dob:req.body.dob
+      housename:req.body.housename,
+      email:req.body.email,
+      city:req.body.city,
+      pincode:req.body.pincode,
+      contact:req.body.contact,
+      district:req.body.district,
+      age:req.body.age,
+      aadhar:req.body.aadhar,
+      licence:req.file
       })
   .exec().then(data=>{
     res.json({
@@ -143,7 +205,7 @@ const logindelivery=(req,res)=>{
   }
 // view cust by id
   const viewdeliveryById=(req,res)=>{
-    deliverys.findOne({_id:req.params.id}).exec()
+    deliverys.findById({_id:req.params.id}).exec()
     .then(data=>{
       console.log(data);
       res.json({
@@ -219,4 +281,15 @@ const logindelivery=(req,res)=>{
 
 
 
-module.exports={registerdelivery,viewdeliverys,editdeliveryById,logindelivery,forgotPwd,viewdeliveryById,deletedeliveryById}
+module.exports={registerdelivery,
+  viewdeliverys,
+  editdeliveryById,
+  logindelivery,
+  forgotPwd,
+  viewdeliveryById,
+  deletedeliveryById,
+  upload,
+  viewdeliveryReqs,
+  acceptDelReqs
+
+}
