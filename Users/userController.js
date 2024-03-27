@@ -39,6 +39,13 @@ const registerUser=(req,res)=>{
         })
     }).catch(err=>{
    
+      if(err.code==1100){
+        res.json({
+          status:409,
+          msg:"Mail Id already in Use",
+          Error:err
+      })
+      }
         res.json({
             status:500,
             msg:"Data not Inserted",
