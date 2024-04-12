@@ -54,8 +54,9 @@ const registerdelivery=(req,res)=>{
 const logindelivery=(req,res)=>{
     const email=req.body.email
     const password=req.body.password
-  
+
     deliverys.findOne({email:email}).exec().then(data=>{
+      if(data.isactive==true){
       if(password==data.password){
         res.json({
           status:200,
@@ -69,6 +70,13 @@ const logindelivery=(req,res)=>{
         
     })
     }
+  }else{
+   return res.json({
+      status:407,
+      msg:"Please get an Approval from Admin for Login"
+   
+  })
+  }
     
   }).catch(err=>{
   res.json({
