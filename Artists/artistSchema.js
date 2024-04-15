@@ -10,7 +10,7 @@ const artistSchema=mongoose.Schema({
         required:true
     },
     dob:{
-        type:Number,
+        type:Date,
         required:true
     },
     contact:{

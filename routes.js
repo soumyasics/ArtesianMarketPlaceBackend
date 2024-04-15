@@ -11,7 +11,7 @@ router.post('/loginUser',userController.loginUser)
 router.post('/viewUserById/:id',userController.viewUserById)
 router.post('/viewUsers',userController.viewUsers)
 router.post('/editUserById/:id',userController.upload,userController.editUserById)
-router.post('/editUserById/:id',userController.deleteUserById)
+router.post('/deleteUserById/:id',userController.deleteUserById)
 router.post('/forgotPwdUser',userController.forgotPwd)
 
 //artist routes

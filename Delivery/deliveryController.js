@@ -22,7 +22,6 @@ const registerdelivery=(req,res)=>{
     const newdelivery=new deliverys({
         firstname:req.body.firstname,
         lastname:req.body.lastname,
-
         housename:req.body.housename,
         email:req.body.email,
         city:req.body.city,

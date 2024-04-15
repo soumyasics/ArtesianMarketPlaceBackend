@@ -55,10 +55,6 @@ const deliverySchema=mongoose.Schema({
         type:Object,
         required:true
     },
-    image:{
-        type:Object,
-        required:true
-    },
     isactive:{
         type:Boolean,
         default:false
