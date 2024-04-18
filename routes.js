@@ -3,6 +3,7 @@ const router=express.Router()
 const userController=require('./Users/userController')
 const artistController=require('./Artists/artistController')
 const deliveryController=require('./Delivery/deliveryController')
+const artwork=require('./Artists/ArtWorks/artWorkController')
 
 
 //user routes
@@ -33,5 +34,14 @@ router.post('/editdeliveryById/:id',deliveryController.upload,deliveryController
 router.post('/deletedeliveryById/:id',deliveryController.deletedeliveryById)
 router.post('/acceptDelReqs',deliveryController.acceptDelReqs)
 router.post('/viewdeliverys',deliveryController.viewdeliverys)
+
+
+//art works
+router.post('/addartworks',artwork.upload,artwork.addartworks)
+router.post('/editArtWorkById/:id',artwork.upload,artwork.editArtWorkById)
+router.post('/deleteArtWorkById/:id',artwork.deleteArtWorkById)
+router.post('/viewArtistById/:id',artwork.viewArtistById)
+router.post('/viewArtworks',artwork.viewArtworks)
+
 
 module.exports=router
