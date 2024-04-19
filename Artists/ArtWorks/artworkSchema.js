@@ -13,6 +13,10 @@ const workSchema=mongoose.Schema({
     file:{
         type:Object,
        required:true
+    },
+    artistId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'artists'
     }
 });
 module.exports=mongoose.model('artworks',workSchema)
