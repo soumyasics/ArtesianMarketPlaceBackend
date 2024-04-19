@@ -116,7 +116,7 @@ const loginArtist=(req,res)=>{
     Artists.findByIdAndUpdate({_id:req.params.id},{
         firstname:req.body.firstname,
         lastname:req.body.lastname,
-
+        image:req.file,
         housename:req.body.housename,
         email:req.body.email,
         city:req.body.city,

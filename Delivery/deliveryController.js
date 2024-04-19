@@ -186,7 +186,6 @@ const logindelivery=(req,res)=>{
     deliverys.findByIdAndUpdate({_id:req.params.id},{
       firstname:req.body.firstname,
       lastname:req.body.lastname,
-
       housename:req.body.housename,
       email:req.body.email,
       city:req.body.city,
