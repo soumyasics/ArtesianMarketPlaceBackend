@@ -14,8 +14,6 @@ const upload = multer({ storage: storage }).single("image");
 //Artist Registration 
 
 const addartworks=(req,res)=>{
-
-
     const art=new artworks({
       name:req.body.name,
       price:req.body.price,
@@ -92,7 +90,7 @@ const addartworks=(req,res)=>{
   })
   }
 // view work by id
-  const viewArtistById=(req,res)=>{
+  const viewArtById=(req,res)=>{
     artworks.findById({_id:req.params.id}).exec()
     .then(data=>{
       console.log(data);
@@ -143,5 +141,5 @@ const addartworks=(req,res)=>{
     upload,
     deleteArtWorkById,
     viewArtworks,
-    viewArtistById
+    viewArtById
   }
