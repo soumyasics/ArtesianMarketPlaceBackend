@@ -40,8 +40,9 @@ router.post('/viewdeliverys',deliveryController.viewdeliverys)
 router.post('/addartworks',artwork.upload,artwork.addartworks)
 router.post('/editArtWorkById/:id',artwork.upload,artwork.editArtWorkById)
 router.post('/deleteArtWorkById/:id',artwork.deleteArtWorkById)
-router.post('/viewArtistById/:id',artwork.viewArtistById)
+router.post('/viewArtistById/:id',artwork.viewArtWorksById)
 router.post('/viewArtworks',artwork.viewArtworks)
+router.post('/viewArtWorksByArtistId/:id',artwork.viewArtWorksByArtistId)
 
 
 module.exports=router
