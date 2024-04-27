@@ -42,7 +42,7 @@ const addartworks=(req,res)=>{
   //View all works
   
   const viewArtworks=(req,res)=>{
-    artworks.find().exec()
+    artworks.find().poopulate('artistId')
     .then(data=>{
       if(data.length>0){
       res.json({
@@ -96,7 +96,7 @@ const addartworks=(req,res)=>{
   }
 // view work by id
   const viewArtWorksById=(req,res)=>{
-    artworks.findById({_id:req.params.id}).exec()
+    artworks.findById({_id:req.params.id}).poopulate('artistId')
     .then(data=>{
       console.log(data);
       res.json({
