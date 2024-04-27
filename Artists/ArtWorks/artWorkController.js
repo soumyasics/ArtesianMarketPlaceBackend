@@ -17,9 +17,11 @@ const addartworks=(req,res)=>{
     const art=new artworks({
       name:req.body.name,
       price:req.body.price,
-      file:req.file
+      file:req.file,
+      artistId:req.body.artistId
     })
-    artworks.save().then(data=>{
+    art.save()
+    .then(data=>{
         res.json({
             status:200,
             msg:"Inserted successfully",
@@ -74,7 +76,9 @@ const addartworks=(req,res)=>{
     artworks.findByIdAndUpdate({_id:req.params.id},{
         name:req.body.name,
         price:req.body.price,
-        file:req.file
+        file:req.file,
+        artistId:req.body.artistId
+
       })
   .exec().then(data=>{
     res.json({
@@ -90,7 +94,7 @@ const addartworks=(req,res)=>{
   })
   }
 // view work by id
-  const viewArtById=(req,res)=>{
+  const viewArtWorksById=(req,res)=>{
     artworks.findById({_id:req.params.id}).exec()
     .then(data=>{
       console.log(data);
@@ -111,6 +115,29 @@ const addartworks=(req,res)=>{
   
   }
   
+
+  
+// view work by id
+const viewArtWorksByArtistId=(req,res)=>{
+  artworks.find({artistId:req.params.id}).exec()
+  .then(data=>{
+    console.log(data);
+    res.json({
+        status:200,
+        msg:"Data obtained successfully",
+        data:data
+    })
+  
+}).catch(err=>{
+  console.log(err);
+    res.json({
+        status:500,
+        msg:"No Data obtained",
+        Error:err
+    })
+})
+
+}
   const deleteArtWorkById=(req,res)=>{
 
     artworks.findByIdAndDelete({_id:req.params.id}).exec()
@@ -141,5 +168,6 @@ const addartworks=(req,res)=>{
     upload,
     deleteArtWorkById,
     viewArtworks,
-    viewArtById
+    viewArtWorksById,
+    viewArtWorksByArtistId
   }
