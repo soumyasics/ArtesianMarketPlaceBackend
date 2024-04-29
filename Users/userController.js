@@ -20,7 +20,6 @@ const registerUser=(req,res)=>{
     const newUser=new users({
         firstname:req.body.firstname,
         lastname:req.body.lastname,
-
         housename:req.body.housename,
         email:req.body.email,
         city:req.body.city,
@@ -133,7 +132,9 @@ const loginUser=(req,res)=>{
         pincode:req.body.pincode,
         contact:req.body.contact,
         district:req.body.district,
-        dob:req.body.dob
+        dob:req.body.dob,
+        image:req.file
+
       })
   .exec().then(data=>{
     res.json({

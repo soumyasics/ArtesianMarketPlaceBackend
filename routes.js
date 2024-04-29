@@ -13,7 +13,7 @@ router.post('/loginUser',userController.loginUser)
 router.post('/viewUserById/:id',userController.viewUserById)
 router.post('/viewUsers',userController.viewUsers)
 router.post('/editUserById/:id',userController.upload,userController.editUserById)
-router.post('/editUserById/:id',userController.deleteUserById)
+router.post('/deleteUserById/:id',userController.deleteUserById)
 router.post('/forgotPwdUser',userController.forgotPwd)
 
 //artist routes
@@ -22,7 +22,7 @@ router.post('/loginArtist',artistController.loginArtist)
 router.post('/viewArtistById/:id',artistController.viewArtistById)
 router.post('/viewArtists',artistController.viewArtists)
 router.post('/editArtistById/:id',artistController.upload,artistController.editArtistById)
-router.post('/editArtistById/:id',artistController.deleteArtistById)
+router.post('/deleteArtistById/:id',artistController.deleteArtistById)
 router.post('/forgotPwdArtist',artistController.forgotPwd)
 
 
@@ -33,7 +33,7 @@ router.post('/viewdeliveryById/:id',deliveryController.viewdeliveryById)
 router.post('/viewdeliveryReqs',deliveryController.viewdeliveryReqs)
 router.post('/editdeliveryById/:id',deliveryController.upload,deliveryController.editdeliveryById)
 router.post('/deletedeliveryById/:id',deliveryController.deletedeliveryById)
-router.post('/acceptDelReqs',deliveryController.acceptDelReqs)
+router.post('/acceptDelReqs/:id',deliveryController.acceptDelReqs)
 router.post('/viewdeliverys',deliveryController.viewdeliverys)
 
 
@@ -41,7 +41,7 @@ router.post('/viewdeliverys',deliveryController.viewdeliverys)
 router.post('/addartworks',artwork.upload,artwork.addartworks)
 router.post('/editArtWorkById/:id',artwork.upload,artwork.editArtWorkById)
 router.post('/deleteArtWorkById/:id',artwork.deleteArtWorkById)
-router.post('/viewArtistById/:id',artwork.viewArtWorksById)
+router.post('/viewArtworkById/:id',artwork.viewArtWorksById)
 router.post('/viewArtworks',artwork.viewArtworks)
 router.post('/viewArtWorksByArtistId/:id',artwork.viewArtWorksByArtistId)
 

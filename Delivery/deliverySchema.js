@@ -54,11 +54,8 @@ const deliverySchema=mongoose.Schema({
     licence:{
         type:Object,
         required:true
-    },
-    image:{
-        type:Object,
-        required:true
-    },
+    }
+    ,
     isactive:{
         type:Boolean,
         default:false

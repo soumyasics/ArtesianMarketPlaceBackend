@@ -14,15 +14,14 @@ const upload = multer({ storage: storage }).single("image");
 //Artist Registration 
 
 const addartworks=(req,res)=>{
-
-
     const art=new artworks({
       name:req.body.name,
       price:req.body.price,
       file:req.file,
       artistId:req.body.artistId
     })
-    artworks.save().then(data=>{
+    art.save()
+    .then(data=>{
         res.json({
             status:200,
             msg:"Inserted successfully",
@@ -42,7 +41,7 @@ const addartworks=(req,res)=>{
   //View all works
   
   const viewArtworks=(req,res)=>{
-    artworks.find().poopulate('artistId')
+    artworks.find().populate('artistId')
     .then(data=>{
       if(data.length>0){
       res.json({
@@ -96,7 +95,7 @@ const addartworks=(req,res)=>{
   }
 // view work by id
   const viewArtWorksById=(req,res)=>{
-    artworks.findById({_id:req.params.id}).poopulate('artistId')
+    artworks.findById({_id:req.params.id}).populate('artistId')
     .then(data=>{
       console.log(data);
       res.json({
