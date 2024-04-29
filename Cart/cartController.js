@@ -29,7 +29,7 @@ let date = new Date()
 //View all cart
 
 const viewCartByUserid = (req, res) => {
-    cartSchema.find({userid:req.params.id}).poopulate('artistId').populate('artid')
+    cartSchema.find({userid:req.params.id}).populate('artistId').populate('artid')
         .then(data => {
             if (data.length > 0) {
                 res.json({
