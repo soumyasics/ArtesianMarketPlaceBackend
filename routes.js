@@ -5,6 +5,7 @@ const artistController=require('./Artists/artistController')
 const deliveryController=require('./Delivery/deliveryController')
 const artwork=require('./Artists/ArtWorks/artWorkController')
 const cart=require('./Cart/cartController')
+const orderController=require('./Orders/orderController')
 
 
 //user routes
@@ -50,5 +51,8 @@ router.post('/addCart',cart.addCart)
 router.post('/viewCartByUserid/:id',cart.viewCartByUserid)
 router.post('/deleteCartById/:id',cart.deleteCartById)
 
-
+//order
+router.post('/addCart',orderController.addOrder)
+router.post('/viewCartByUserid/:id',orderController.viewOrderByUserid)
+router.post('/deleteCartById/:id',orderController.deleteOrderById)
 module.exports=router
