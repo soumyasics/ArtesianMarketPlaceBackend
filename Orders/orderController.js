@@ -3,7 +3,7 @@ const orderSchema = require("./orderSchema")
 const addOrder = (req, res) => {
 
 let date = new Date()
-    const art = new cartSchema({
+    const art = new orderSchema({
         userid: req.body.userid,
         artid: req.body.artid,
       date:date,
