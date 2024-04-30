@@ -45,6 +45,8 @@ router.post('/deleteArtWorkById/:id',artwork.deleteArtWorkById)
 router.post('/viewArtworkById/:id',artwork.viewArtWorksById)
 router.post('/viewArtworks',artwork.viewArtworks)
 router.post('/viewArtWorksByArtistId/:id',artwork.viewArtWorksByArtistId)
+router.post('/searchartByName/:name', artwork.searchArtByName)
+
 
 //cart
 router.post('/addCart',cart.addCart)
@@ -52,7 +54,7 @@ router.post('/viewCartByUserid/:id',cart.viewCartByUserid)
 router.post('/deleteCartById/:id',cart.deleteCartById)
 
 //order
-router.post('/addCart',orderController.addOrder)
-router.post('/viewCartByUserid/:id',orderController.viewOrderByUserid)
+router.post('/orderitem',orderController.addOrder)
+router.post('/vieworderByUserid/:id',orderController.viewOrderByUserid)
 router.post('/deleteCartById/:id',orderController.deleteOrderById)
 module.exports=router

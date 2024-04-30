@@ -161,6 +161,22 @@ const viewArtWorksByArtistId=(req,res)=>{
   
   }
 
+  //search artwork
+  const searchArtByName = (req, res) => {
+    artworks.find({ name: { $regex: req.params.name, $options: 'i' } }).populate('artistId')
+        .then(services => {
+            if (services.length === 0) {
+                return res.status(404).json({ message: 'No art found with the name.' });
+            }
+            res.status(200).json(services);
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ message: 'Server Error' });
+        });
+}
+
+
 
   module.exports={
     addartworks,
@@ -169,5 +185,6 @@ const viewArtWorksByArtistId=(req,res)=>{
     deleteArtWorkById,
     viewArtworks,
     viewArtWorksById,
-    viewArtWorksByArtistId
+    viewArtWorksByArtistId,
+    searchArtByName
   }
