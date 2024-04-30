@@ -53,6 +53,32 @@ const viewOrderByUserid = (req, res) => {
 
 }
 
+const viewOrderByArtist = (req, res) => {
+    orderSchema.find({artistId:req.params.id}).populate('userid').populate('artid')
+        .then(data => {
+            if (data.length > 0) {
+                res.json({
+                    status: 200,
+                    msg: "Data obtained successfully",
+                    data: data
+                })
+            } else {
+                res.json({
+                    status: 200,
+                    msg: "No Data obtained "
+                })
+            }
+        }).catch(err => {
+            res.json({
+                status: 500,
+                msg: "Data not Inserted",
+                Error: err
+            })
+        })
+
+}
+
+
 
 const deleteOrderById=(req,res)=>{
 
@@ -79,5 +105,6 @@ const deleteOrderById=(req,res)=>{
   module.exports={
     addOrder,
     deleteOrderById,
-    viewOrderByUserid
+    viewOrderByUserid,
+    viewOrderByArtist
   }
