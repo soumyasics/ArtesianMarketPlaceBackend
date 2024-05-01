@@ -52,7 +52,6 @@ const addOrderFromCart = (req, res) => {
     res.json({
         status: 200,
         msg: "Inserted successfully",
-        data: data
     })
 }
 
