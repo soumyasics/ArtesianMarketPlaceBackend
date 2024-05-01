@@ -18,6 +18,18 @@ const orderSchema=mongoose.Schema({
     artistId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'artists'
+    },
+    deliveryAssigned:{
+        type:String,
+        default:'pending'
+    },
+    deliveryStatus:{
+        type:String,
+        default:'pending'
+    },
+    deliveryId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'deliveryagents'
     }
 });
 module.exports=mongoose.model('orders',orderSchema)
