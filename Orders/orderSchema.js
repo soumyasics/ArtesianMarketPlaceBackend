@@ -12,7 +12,7 @@ const orderSchema=mongoose.Schema({
     },
    
     date:{
-        type:Object,
+        type:Date,
        required:true
     },
     artistId:{
@@ -30,6 +30,8 @@ const orderSchema=mongoose.Schema({
     deliveryId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'deliveryagents'
+    },expectedDeliveryDate:{
+        type:Date
     }
 });
 module.exports=mongoose.model('orders',orderSchema)
