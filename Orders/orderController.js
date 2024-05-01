@@ -26,6 +26,36 @@ let date = new Date()
 // Add cart -- finished
 
 
+
+const addOrderFromCart = (req, res) => {
+
+    let date = new Date()
+    let cartitems=req.body.cartitems
+
+    cartitems.map(x=>{
+
+    
+        const art = new orderSchema({
+            userid: x.userid,
+            artid: x.artid,
+          date:date,
+            artistId: x.artistId
+        })
+        art.save().then(data => {
+            console.log("data saved");
+        }).catch(err => {
+           console.log(err);
+        })
+
+    })
+    
+    res.json({
+        status: 200,
+        msg: "Inserted successfully",
+        data: data
+    })
+}
+
 //View all cart
 
 const viewOrderByUserid = (req, res) => {
@@ -106,5 +136,6 @@ const deleteOrderById=(req,res)=>{
     addOrder,
     deleteOrderById,
     viewOrderByUserid,
-    viewOrderByArtist
+    viewOrderByArtist,
+    addOrderFromCart
   }

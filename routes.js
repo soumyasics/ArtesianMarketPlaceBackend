@@ -58,4 +58,7 @@ router.post('/orderitem',orderController.addOrder)
 router.post('/vieworderByUserid/:id',orderController.viewOrderByUserid)
 router.post('/viewOrderByArtist/:id',orderController.viewOrderByArtist)
 router.post('/deleteOrderById/:id',orderController.deleteOrderById)
+
+router.post('/addOrderFromCart',orderController.addOrderFromCart)
+
 module.exports=router
