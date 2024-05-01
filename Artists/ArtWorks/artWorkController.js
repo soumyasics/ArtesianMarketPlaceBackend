@@ -1,3 +1,4 @@
+const orderSchema = require('../../Orders/orderSchema');
 const artworks=require('./artworkSchema')
 const multer=require('multer')
 
@@ -138,11 +139,20 @@ const viewArtWorksByArtistId=(req,res)=>{
 })
 
 }
-  const deleteArtWorkById=(req,res)=>{
+  const deleteArtWorkById=async(req,res)=>{
+    let flag=0
+await orderSchema.findOne({artid:req.params.id}).exec().then(dataa=>{
+if(dataa!=null)
+{
+  if(dataa.deliveryStatus=="pickup"||dataa.deliveryStatus=="assigned"){
+    flag=1
+  }
+}
+  })
 
-    artworks.findByIdAndDelete({_id:req.params.id}).exec()
+if(flag==0){
+  await artworks.findByIdAndDelete({_id:req.params.id}).exec()
     .then(data=>{
-    emps=data
       console.log(data);
       res.json({
           status:200,
@@ -158,6 +168,13 @@ const viewArtWorksByArtistId=(req,res)=>{
           Error:err
       })
   })
+}else{
+  res.json({
+    status:500,
+    msg:"You can't delete It as we have an order Received for It "
+    
+})
+}
   
   }
 
