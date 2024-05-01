@@ -19,6 +19,10 @@ const orderSchema=mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'artists'
     },
+    deliveryAssigned:{
+        type:String,
+        default:'pending'
+    },
     deliveryStatus:{
         type:String,
         default:'pending'

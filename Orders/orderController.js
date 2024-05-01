@@ -58,7 +58,7 @@ const addOrderFromCart = (req, res) => {
 //View all cart
 
 const viewOrderByUserid = (req, res) => {
-    orderSchema.find({userid:req.params.id}).populate('artistId').populate('artid')
+    orderSchema.find({userid:req.params.id}).populate('artistId').populate('artid').populate('deliveryId')
         .then(data => {
             if (data.length > 0) {
                 res.json({
@@ -83,7 +83,7 @@ const viewOrderByUserid = (req, res) => {
 }
 
 const viewOrderByArtist = (req, res) => {
-    orderSchema.find({artistId:req.params.id}).populate('userid').populate('artid')
+    orderSchema.find({artistId:req.params.id}).populate('userid').populate('artid').populate('deliveryId')
         .then(data => {
             if (data.length > 0) {
                 res.json({
@@ -134,7 +134,9 @@ const deleteOrderById=(req,res)=>{
   
 const viewPendingOrdersForDelivery=(req,res)=>{
 
-    orderSchema.find({deliveryStatus:'pending'}).exec()
+    orderSchema.find({deliveryAssigned:'pending'}).populate('artistId')
+    .populate('userid')
+    .populate('artid')
     .then(data=>{
       console.log(data);
       res.json({
@@ -179,9 +181,37 @@ const updateStatusOfOrdersByOrderId=(req,res)=>{
   
   }
   
+   
+const acceptorderByDeliverAgent=(req,res)=>{
+
+    orderSchema.findByIdAndUpdate({_id:req.params.id},{
+        deliveryAssigned:req.body.deliveryAssigned,
+        deliveryId:req.body.deliveryId
+    }).exec()
+    .then(data=>{
+      console.log(data);
+      res.json({
+          status:200,
+          msg:"Data updated successfully",
+          data:data
+      })
+    
+  }).catch(err=>{
+    console.log(err);
+      res.json({
+          status:500,
+          msg:"No Data ",
+          Error:err
+      })
+  })
+  
+  }
+  
 const viewOrdersByDeliveryId=(req,res)=>{
 
-    orderSchema.find({deliveryId:req.params.id}).exec()
+    orderSchema.find({deliveryId:req.params.id}).populate('artistId')
+    .populate('userid')
+    .populate('artid')
     .then(data=>{
       console.log(data);
       res.json({
@@ -208,6 +238,7 @@ const viewOrdersByDeliveryId=(req,res)=>{
     addOrderFromCart,
     viewPendingOrdersForDelivery,
     viewOrdersByDeliveryId,
-updateStatusOfOrdersByOrderId
+updateStatusOfOrdersByOrderId,
+acceptorderByDeliverAgent
 
   }
