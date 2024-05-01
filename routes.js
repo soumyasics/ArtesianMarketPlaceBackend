@@ -63,5 +63,6 @@ router.post('/addOrderFromCart',orderController.addOrderFromCart)
 router.post('/viewPendingOrdersForDelivery',orderController.viewPendingOrdersForDelivery)
 router.post('/updateStatusOfOrdersByOrderId/:id',orderController.updateStatusOfOrdersByOrderId)
 router.post('/viewOrdersByDeliveryId/:id',orderController.viewOrdersByDeliveryId)
+router.post('/acceptorderByDeliverAgent/:id',orderController.acceptorderByDeliverAgent)
 
 module.exports=router
