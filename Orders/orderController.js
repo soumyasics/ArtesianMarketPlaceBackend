@@ -52,7 +52,6 @@ const addOrderFromCart = (req, res) => {
     res.json({
         status: 200,
         msg: "Inserted successfully",
-        data: data
     })
 }
 
@@ -132,10 +131,83 @@ const deleteOrderById=(req,res)=>{
   
   }
 
+  
+const viewPendingOrdersForDelivery=(req,res)=>{
+
+    orderSchema.find({deliveryStatus:'pending'}).exec()
+    .then(data=>{
+      console.log(data);
+      res.json({
+          status:200,
+          msg:"Data obtained successfully",
+          data:data
+      })
+    
+  }).catch(err=>{
+    console.log(err);
+      res.json({
+          status:500,
+          msg:"No Data obtained",
+          Error:err
+      })
+  })
+  
+  }
+
+  
+const updateStatusOfOrdersByOrderId=(req,res)=>{
+
+    orderSchema.findByIdAndUpdate({_id:req.params.id},{
+        deliveryStatus:req.body.deliveryStatus
+    }).exec()
+    .then(data=>{
+      console.log(data);
+      res.json({
+          status:200,
+          msg:"Data updated successfully",
+          data:data
+      })
+    
+  }).catch(err=>{
+    console.log(err);
+      res.json({
+          status:500,
+          msg:"No Data ",
+          Error:err
+      })
+  })
+  
+  }
+  
+const viewOrdersByDeliveryId=(req,res)=>{
+
+    orderSchema.find({deliveryId:req.params.id}).exec()
+    .then(data=>{
+      console.log(data);
+      res.json({
+          status:200,
+          msg:"Data obtained successfully",
+          data:data
+      })
+    
+  }).catch(err=>{
+    console.log(err);
+      res.json({
+          status:500,
+          msg:"No Data obtained",
+          Error:err
+      })
+  })
+  
+  }
   module.exports={
     addOrder,
     deleteOrderById,
     viewOrderByUserid,
     viewOrderByArtist,
-    addOrderFromCart
+    addOrderFromCart,
+    viewPendingOrdersForDelivery,
+    viewOrdersByDeliveryId,
+updateStatusOfOrdersByOrderId
+
   }
