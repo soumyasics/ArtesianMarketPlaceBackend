@@ -185,7 +185,7 @@ const updateStatusOfOrdersByOrderId=(req,res)=>{
 const acceptorderByDeliverAgent=(req,res)=>{
 
     orderSchema.findByIdAndUpdate({_id:req.params.id},{
-        deliveryAssigned:req.body.deliveryAssigned,
+        deliveryAssigned:"assigned",
         deliveryId:req.body.deliveryId
     }).exec()
     .then(data=>{
